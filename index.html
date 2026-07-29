@@ -131,6 +131,8 @@
         <div class="logo">TheNightNix <span>Repacks</span></div>
     </header>
 
+    <input type="text" id="searchInput" onkeyup="searchGame()" placeholder="..." style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #ccc;">
+
     <!-- محتوى الموقع الرئيسي (3 أعمدة) -->
     <div class="main-container">
         
@@ -166,6 +168,20 @@
     <footer>
         جميع الحقوق محفوظة | TheNightNix Repacks &copy; 2026
     </footer>
+<script>
+function searchGame() {
+    let input = document.getElementById('searchInput').value.toLowerCase();
+    let links = document.querySelectorAll('.game-list a'); // دير الكلاس أو البلاصة اللي فيها قائمة الألعاب تاعك
 
+    links.forEach(function(item) {
+        let text = item.textContent.toLowerCase();
+        if (text.includes(input)) {
+            item.style.display = "";
+        } else {
+            item.style.display = "none";
+        }
+    });
+}
+</script>
 </body>
 </html>
