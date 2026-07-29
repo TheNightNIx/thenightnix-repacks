@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheNightNix Repacks - الصفحة الرئيسية</title>
+    <style>
+        body {
+            font-family: Tahoma, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        /* شريط العنوان العلوي */
+        header {
+            background-color: #111;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 14px;
+        }
+        .logo {
+            color: #ff3399;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .logo span {
+            color: white;
+        }
+        /* تخطيط الصفحة */
+        .main-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        /* الصناديق الجانبية */
+        .sidebar-left, .sidebar-right {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+            width: 250px;
+            min-height: 400px;
+        }
+        .sidebar-left .box-title {
+            color: #ff3399;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .sidebar-right {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+        }
+        .sidebar-right h4 {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+            color: #333;
+        }
+        /* المحتوى الرئيسي في المنتصف */
+        .content-center {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 30px;
+            flex-grow: 1;
+            text-align: center;
+        }
+        .content-center h2 {
+            font-size: 24px;
+            color: #333;
+        }
+        .content-center p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+        /* قائمة الألعاب */
+        .games-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: right;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .games-list a {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            border-bottom: 1px dashed #eee;
+            padding-bottom: 10px;
+            display: block;
+        }
+        .games-list a:hover {
+            color: #ff3399;
+        }
+        /* الفوتر السفلي */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+            font-size: 13px;
+            border-top: 1px solid #ddd;
+            margin-top: 40px;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شريط القوائم العلوي -->
+    <header>
+        <div class="nav-links">
+            <a href="#">الرئيسية</a>
+            <a href="#">طلب لعبة</a>
+        </div>
+        <div class="logo">TheNightNix <span>Repacks</span></div>
+    </header>
+
+    <!-- محتوى الموقع الرئيسي (3 أعمدة) -->
+    <div class="main-container">
+        
+        <!-- القائمة الجانبية اليسرى -->
+        <div class="sidebar-left">
+            <div class="box-title">TheNightNix</div>
+            <p style="font-size: 13px; color: #555;">شكراً لزيارة موقعنا!</p>
+        </div>
+
+        <!-- المحتوى الرئيسي (قائمة الألعاب) -->
+        <div class="content-center">
+            <div style="font-size: 13px; color: #777; margin-bottom: 5px;">أحدث الإضافات</div>
+            <h2>قائمة الألعاب المتاحة للتحميل</h2>
+            <p>اضغط على اسم أي لعبة للتوجه مباشرة لرابط التحميل.</p>
+
+            <div class="games-list">
+                <a href="game1.html"> [Pummel Party Repack]</a>
+                <a href="#">← لعبة رقم 2</a>
+                <a href="#">← لعبة رقم 3</a>
+            </div>
+        </div>
+
+        <!-- القائمة الجانبية اليمنى -->
+        <div class="sidebar-right">
+            <p style="font-size: 12px; color: #666; margin-top: 0;">الموقع الرسمي لتحميل الألعاب المفحوصة والمكركة بروابط مباشرة.</p>
+            <h4>أحدث الألعاب</h4>
+            <h4 style="color: #666; font-weight: normal; border: none;">الألعاب الشائعة</h4>
+        </div>
+
+    </div>
+
+    <!-- الفوتر -->
+    <footer>
+        جميع الحقوق محفوظة | TheNightNix Repacks &copy; 2026
+    </footer>
+
+</body>
+</html>
