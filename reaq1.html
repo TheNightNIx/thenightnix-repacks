@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>طلب لعبة - TheNightNix Repacks</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Tahoma, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        h1 {
+            color: #ff4d4d;
+            text-align: center;
+        }
+        .alerts {
+            background: #2d2d2d;
+            border-right: 4px solid #ffcc00;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        .alerts h3 {
+            margin-top: 0;
+            color: #ffcc00;
+        }
+        .alerts ul {
+            margin: 0;
+            padding-right: 20px;
+        }
+        .alerts li {
+            margin-bottom: 8px;
+        }
+        .back-home {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #3498db;
+            text-decoration: none;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            background: #2d2d2d;
+            border: 1px solid #444;
+            color: white;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background: #ff4d4d;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #e04343;
+        }
+        .requests-list {
+            margin-top: 20px;
+            border-top: 1px solid #333;
+            padding-top: 15px;
+        }
+        .request-item {
+            background: #252525;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border-left: 3px solid #3498db;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .time-left {
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="index.html" class="back-home">← العودة للرئيسية</a>
+        
+        <h1>🎮 طلب لعبة جديدة</h1>
+        
+        <!-- التنبيهات -->
+        <div class="alerts">
+            <h3>⚠️ تنبيهات هامة جداً قبل الطلب:</h3>
+            <ul>
+                <li>تأكد أن اللعبة مخصصة للكمبيوتر (PC) وليست لمنصات أخرى.</li>
+                <li>الألعاب أونلاين بالكامل (Online-only) لا يمكن توفيرها.</li>
+                <li>الطلبات تظهر للجميع وتبقى ظاهرة لمدة <strong>48 ساعة (يومين)</strong> ثم تحذف تلقائياً.</li>
+                <li>يمنع منعاً باتاً استخدام ألفاظ نابية أو شتم، وسيتم رفض الطلب تلقائياً.</li>
+            </ul>
+        </div>
+
+        <!-- خانة كتابة الطلب -->
+        <div class="form-group">
+            <label for="gameInput"><strong>اكتب اسم اللعبة التي تريدها:</strong></label><br><br>
+            <input type="text" id="gameInput" placeholder="مثال: God of War...">
+        </div>
+        <button onclick="addRequest()">إرسال الطلب 🚀</button>
+
+        <!-- قائمة الطلبات الظاهرة -->
+        <div class="requests-list">
+            <h3>💬 الألعاب المطلوبة حالياً:</h3>
+            <div id="requestsContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        // قائمة الكلمات الممنوعة (يمكنك إضافة أي كلمات تريدها هنا)
+        const badWords = ["كلب", "قحبة", "زبي", "حمار", "مجانين", "تبا", "fuck", "bitch", "shit", "Asshole"];
+
+        function containsBadWord(text) {
+            const lowerText = text.toLowerCase();
+            return badWords.some(word => lowerText.includes(word));
+        }
+
+        function loadRequests() {
+            const container = document.getElementById('requestsContainer');
+            let requests = JSON.parse(localStorage.getItem('autoDeleteGameRequests')) || [];
+            
+            const now = new Date().getTime();
+            const twoDaysInMs = 48 * 60 * 60 * 1000; // 48 ساعة بالميلي ثانية
+
+            // تصفية الطلبات وحذف التي مر عليها أكثر من 48 ساعة تلقائياً
+            requests = requests.filter(req => (now - req.time) < twoDaysInMs);
+            
+            localStorage.setItem('autoDeleteGameRequests', JSON.stringify(requests));
+
+            container.innerHTML = '';
+            if (requests.length === 0) {
+                container.innerHTML = '<p style="color: #888;">لا توجد طلبات نشطة حالياً، كن أول من يطلب!</p>';
+                return;
+            }
+
+            requests.forEach((req) => {
+                const div = document.createElement('div');
+                div.className = 'request-item';
+                
+                const timeLeftHours = Math.round((twoDaysInMs - (now - req.time)) / (1000 * 60 * 60));
+                
+                div.innerHTML = `
+                    <span>🎮 ${req.text}</span>
+                    <span class="time-left">تتحذف بعد: ${timeLeftHours} ساعة</span>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function addRequest() {
+            const input = document.getElementById('gameInput');
+            const value = input.value.trim();
+            
+            if (value === '') {
+                alert('الرجاء كتابة اسم اللعبة أولاً!');
+                return;
+            }
+
+            // فحص الكلمات النابية
+            if (containsBadWord(value)) {
+                alert('⚠️ عذراً، يحتوي طلبك على كلمات غير لائقة. يرجى احترام الآخرين!');
+                input.value = '';
+                return;
+            }
+
+            let requests = JSON.parse(localStorage.getItem('autoDeleteGameRequests')) || [];
+            
+            requests.push({
+                text: value,
+                time: new Date().getTime()
+            });
+            
+            localStorage.setItem('autoDeleteGameRequests', JSON.stringify(requests));
+            
+            input.value = '';
+            loadRequests();
+            alert('تم إرسال طلبك بنجاح وأصبح ظاهراً في القائمة لمدة 48 ساعة!');
+        }
+
+        window.onload = loadRequests;
+    </script>
+
+</body>
+</html>
